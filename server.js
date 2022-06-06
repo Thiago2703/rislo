@@ -5,6 +5,7 @@ const app = express();
 var host = process.env.HOST || '0.0.0.0';
 var port = process.env.PORT || 8080;
 
+app.use(express.static(__dirname + '/'));
 app.get('/', (req, res) => {
     fs.readFile('./index.html', (err, html) => res.end(html));
 });
