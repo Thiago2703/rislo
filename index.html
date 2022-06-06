@@ -27,10 +27,18 @@
       <div class="swiper-slide" data-slide-type="img">Slide 3</div>
       <div class="swiper-slide" data-slide-type="img">Slide 5</div>
       <div class="swiper-slide" data-slide-type="img">Slide 6</div>
+      <div class="swiper-slide" data-slide-type="img">
+        <video class="video__player" autoplay="autoplay" controls="controls" muted="muted">
+          <source type="video/mp4" src="https://v.redd.it/c97vfkhh28hz/DASH_2_4_M?source=fallback"><audio
+            controls="controls">
+            <source type="audio/mp4" src="https://v.redd.it/c97vfkhh28hz/audio">
+          </audio>
+        </video>
+      </div>
     </div>
-    <!-- Add Arrows 
+    <!-- Add Arrows -->
     <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>-->
+    <div class="swiper-button-prev"></div>
   </div>
   <script>
     // variable 
@@ -44,62 +52,12 @@
     var swiper = new Swiper(
       '.swiper-container', {
       direction: "vertical",
-      /*navigation: {
+      navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
-      },*/
+      },
     });
 
-    // HTML5 vdo object
-    var options = {};
-    var player = videojs('my-player', options);
-    player.on('ended', function () {
-      next()
-    })
-
-    // swiper object
-    swiper.on('slideChangeTransitionEnd', function () {
-      var index = swiper.activeIndex
-      var currentSlide = $(swiper.slides[index])
-      var currentSlideType = currentSlide.data('slide-type')
-
-      // incase user click next before video ended
-      if (videoPlayStatus === VIDEO_PLAYING_STATE.PLAYING) {
-        player.pause()
-      }
-
-      clearTimeout(timeout)
-
-      switch (currentSlideType) {
-        case 'img':
-          runNext()
-          break;
-        case 'vdo':
-          player.currentTime(0)
-          player.play()
-          videoPlayStatus = VIDEO_PLAYING_STATE.PLAYING
-          break;
-        default:
-          throw new Error('invalid slide type');
-      }
-    })
-
-    // global function
-    function prev() {
-      swiper.slidePrev();
-    }
-
-    function next() {
-      swiper.slideNext();
-    }
-
-    function runNext() {
-      timeout = setTimeout(function () {
-        next()
-      }, waiting)
-    }
-
-    runNext()
 
     /*
        const videos = document.querySelectorAll('video');

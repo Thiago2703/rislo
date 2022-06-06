@@ -129,7 +129,7 @@ window.onload = function () {
 
 		let vid_container = document.createElement('div');
 		vid_container.className = 'swiper-slide';
-		vid_container.setAttribute('data-slide-type', 'img')
+		vid_container.setAttribute('data-slide-type', 'vdo')
 
 		let vid_header = document.createElement('div');
 		vid_header.className = 'videoHeader';
@@ -226,8 +226,11 @@ window.onload = function () {
 		video.appendChild(audio_tag);
 		//vid_container.appendChild(vid_header);
 		vid_container.appendChild(video);
+
+		swiper.appendSlide(vid_container);
+
 		//vid_container.appendChild(vid_footer);
-		main.appendChild(vid_container);
+		//main.appendChild(vid_container);
 
 		setObserver(video);
 		//observer.observe(video);
