@@ -444,7 +444,7 @@ window.onload = function () {
 				catch(e => console.error('Error: ' + e.message));
 		} else {
 			n_elem = [];
-			await sleep(15000)
+			await sleep(60000)
 			await fetch(`${proxies[Math.floor(Math.random() * proxies.length)]}https://api.pushshift.io/reddit/search/submission/?subreddit=funny&sort=desc&sort_type=score&after=${start_time}&before=${start_time + 86400}&size=100`).
 				then(r => r.json()).
 				then(d => getData(d)).
