@@ -4,6 +4,10 @@ body {
   height: 100%;
 }
 
+html {
+  scroll-snap-type: y mandatory;
+}
+
 body {
   background: #eee;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
