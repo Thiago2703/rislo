@@ -71,6 +71,9 @@ function intToString(num) {
 	return (num / si[index].v).toFixed(1).replace(/\.0+$|(\.[0-9]*[1-9])0+$/, "$1") + si[index].s;
 }
 
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 window.onload = function () {
 	/*
@@ -429,20 +432,26 @@ window.onload = function () {
 				n_elem.push(child)
 			}
 		}
-		//if (n_elem.length < 30) {
-		start_time += 86400;
-		await fetch(`${proxies[Math.floor(Math.random() * proxies.length)]}https://api.pushshift.io/reddit/search/submission/?subreddit=funny&sort=desc&sort_type=score&after=${start_time}&before=${start_time + 86400}&size=100`).
-			then(r => r.json()).
-			then(d => getData(d)).
-			catch(e => console.error('Error: ' + e.message));
-		/*} else {
-			for (elem of n_elem) {
+		if (n_elem.length < 30) {
+			start_time += 86400;
+			await fetch(`${proxies[Math.floor(Math.random() * proxies.length)]}https://api.pushshift.io/reddit/search/submission/?subreddit=funny&sort=desc&sort_type=score&after=${start_time}&before=${start_time + 86400}&size=100`).
+				then(r => r.json()).
+				then(d => getData(d)).
+				catch(e => console.error('Error: ' + e.message));
+		} else {
+			n_elem = [];
+			await sleep(15000)
+			await fetch(`${proxies[Math.floor(Math.random() * proxies.length)]}https://api.pushshift.io/reddit/search/submission/?subreddit=funny&sort=desc&sort_type=score&after=${start_time}&before=${start_time + 86400}&size=100`).
+				then(r => r.json()).
+				then(d => getData(d)).
+				catch(e => console.error('Error: ' + e.message));
+			/*for (elem of n_elem) {
 				createPost(elem);
-			}
+			}*/
 
-			
+
 			//n_watched = 0;
-		}*/
+		}
 		//createPost(child);
 		state.beforeUrl = state.baseUrl + '?count=' + state.page + '&before=' + d.data.before;
 		state.afterUrl = state.baseUrl + '?count=' + state.page + '&after=' + d.data.after;
