@@ -124,11 +124,12 @@ window.onload = function () {
 		let day = ("0" + date.getDate()).slice(-2);
 		let month = ("0" + (date.getMonth() + 1)).slice(-2);
 		let year = date.getFullYear();
-		let main = document.querySelector('.app__videos');
+		let main = document.querySelector('.swiper-wrapper');
 
 
 		let vid_container = document.createElement('div');
-		vid_container.className = 'video';
+		vid_container.className = 'swiper-slide';
+		vid_container.setAttribute('data-slide-type', 'img')
 
 		let vid_header = document.createElement('div');
 		vid_header.className = 'videoHeader';
@@ -223,9 +224,9 @@ window.onload = function () {
 
 		video.appendChild(source_video);
 		video.appendChild(audio_tag);
-		vid_container.appendChild(vid_header);
+		//vid_container.appendChild(vid_header);
 		vid_container.appendChild(video);
-		vid_container.appendChild(vid_footer);
+		//vid_container.appendChild(vid_footer);
 		main.appendChild(vid_container);
 
 		setObserver(video);
