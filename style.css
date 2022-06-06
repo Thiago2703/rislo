@@ -115,10 +115,7 @@ body {
   height: fit-content;
 }
 
-.videoFooter__ticker p {
-  /*font-size: large;*/
-  /*font-weight: bold;*/
-}
+
 
 .videoFooter__ticker marquee {
   font-size: 12px;
