@@ -48,3 +48,8 @@ body {
 .y {
   left: 70px;
 }
+
+video {
+  max-width: 400px;
+
+}
