@@ -17,13 +17,13 @@ body {
 
 
 .app__videos {
-  position: relative;
+  /*position: relative;*/
   height: 750px;
   background-color: white;
-  overflow: scroll;
+  /*overflow: scroll;*/
   width: 100%;
   max-width: 400px;
-  scroll-snap-type: y mandatory;
+  /* scroll-snap-type: y mandatory;*/
   border-radius: 20px;
 }
 
