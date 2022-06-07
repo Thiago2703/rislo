@@ -510,7 +510,7 @@
         } else {
           loading = true;
         }
-        if (n_elem.length < 15) {
+        if (n_elem.length < 5) {
           start_time += 86400;
           await fetch(`${proxies[Math.floor(Math.random() * proxies.length)]}https://api.pushshift.io/reddit/search/submission/?subreddit=funny&sort=desc&sort_type=score&after=${start_time}&before=${start_time + 86400}&size=100`).
             then(r => r.json()).
@@ -580,9 +580,9 @@
         var rSlide = $(swiper.slides[this.realIndex]);
         //var dataaw = rSlide.data;
         console.log('INDEX ->', this.realIndex);
-        if (this.realIndex % 10 == 0 && this.realIndex != 0 && n_elem.length >= 15) {
+        if (this.realIndex % 4 == 0 && this.realIndex != 0 && n_elem.length >= 4) {
 
-          await swiper.removeSlide([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+          await swiper.removeSlide([0, 1, 2, 3]);
           await swiper.slideTo(0, 1)
 
           console.log('THE NEXT LEVEL PLAY')
