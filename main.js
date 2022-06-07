@@ -18,6 +18,30 @@ function isScrolledIntoView(elem) {
 	viewportBottom = viewportTop + $win.height();
 	return (elementBottom > viewportTop && elementTop < viewportBottom);
 }
+
+var observerinit = new IntersectionObserver(function (entries, observerinit) {
+	entries.forEach(entry => {
+		if (entry.isIntersecting) {
+			// console.log('Loading entry: ', entry.target.getAttribute("data-src")); // Loading video
+			console.log('WATATATATATATATATAT')
+			vid = entry.target.querySelector('source[type="video/mp4"]');
+			aud = entry.target.querySelector('source[type="audio/mp4"]');
+			aud_tag = entry.target.querySelector('audio');
+			vid.setAttribute('src', vid.getAttribute("data-src"));
+			aud.setAttribute('src', aud.getAttribute("data-src"));
+			//entry.target.setAttribute('poster',"https://via.placeholder.com/620x350/aaaaaa/999999?text=Video Loaded");
+			entry.target.load();
+			aud_tag.load();
+			observerinit.unobserve(entry.target);
+			/*observer.observe(entry.target);*/
+		}
+	})
+}, {
+	// set margin-down to preload video 
+	rootMargin: "0px 0px 300px 0px"
+});
+
+
 function setObserver(video) {
 	let isPaused = false;
 
@@ -192,7 +216,8 @@ window.onload = function () {
 		audio_tag.appendChild(source_audio)
 
 		let mp4 = p.media.reddit_video.fallback_url;
-		source_video.src = mp4;
+		//source_video.src = mp4;
+		source_video.setAttribute('data-src', mp4)
 		//source_audio.src = mp4.replace(/\/[^\/]*$/g, '/DASH_audio.mp4')
 		//video.pause();
 
@@ -202,9 +227,11 @@ window.onload = function () {
 		let parsedManifest = mpdParser.parse(manifest, { mpd });
 		try {
 			audio_url = parsedManifest.mediaGroups.AUDIO.audio.main.playlists[0].sidx.uri.match(/\/[^\/]*$/g)[0];
-			source_audio.src = mp4.replace(/\/[^\/]*$/g, audio_url)
+			//source_audio.src = mp4.replace(/\/[^\/]*$/g, audio_url)
+			source_audio.setAttribute('data-src', mp4.replace(/\/[^\/]*$/g, audio_url))
 		} catch (error) {
-			source_audio.src = mp4.replace(/\/[^\/]*$/g, '/DASH_audio.mp4')
+			//source_audio.src = mp4.replace(/\/[^\/]*$/g, '/DASH_audio.mp4')
+			source_audio.setAttribute('data-src', mp4.replace(/\/[^\/]*$/g, '/DASH_audio.mp4'))
 		}
 		//window.stop()
 		/*if (parsedManifest.mediaGroups.AUDIO.audio)
@@ -215,6 +242,7 @@ window.onload = function () {
 		video.onplay = function () { audio_tag.play(); }
 		video.onpause = function () { audio_tag.pause(); }
 		video.onseeked = () => audio_tag.currentTime = video.currentTime;
+
 		video.className = 'video__player';
 		//video.src = p.media.reddit_video.fallback_url//"sample.mp4"
 		//video.setAttribute('autoplay', 'autoplay')
@@ -231,6 +259,8 @@ window.onload = function () {
 
 		//vid_container.appendChild(vid_footer);
 		//main.appendChild(vid_container);
+		observerinit.observe(video)
+		//observerinit.observe(source_audio)
 
 		//setObserver(video);
 		//observer.observe(video);
