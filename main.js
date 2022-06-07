@@ -216,8 +216,8 @@ window.onload = function () {
 		audio_tag.appendChild(source_audio)
 
 		let mp4 = p.media.reddit_video.fallback_url;
-		//source_video.src = mp4;
-		source_video.setAttribute('data-src', mp4)
+		source_video.src = mp4;
+		//source_video.setAttribute('data-src', mp4)
 		//source_audio.src = mp4.replace(/\/[^\/]*$/g, '/DASH_audio.mp4')
 		//video.pause();
 
@@ -227,11 +227,11 @@ window.onload = function () {
 		let parsedManifest = mpdParser.parse(manifest, { mpd });
 		try {
 			audio_url = parsedManifest.mediaGroups.AUDIO.audio.main.playlists[0].sidx.uri.match(/\/[^\/]*$/g)[0];
-			//source_audio.src = mp4.replace(/\/[^\/]*$/g, audio_url)
-			source_audio.setAttribute('data-src', mp4.replace(/\/[^\/]*$/g, audio_url))
+			source_audio.src = mp4.replace(/\/[^\/]*$/g, audio_url)
+			//source_audio.setAttribute('data-src', mp4.replace(/\/[^\/]*$/g, audio_url))
 		} catch (error) {
-			//source_audio.src = mp4.replace(/\/[^\/]*$/g, '/DASH_audio.mp4')
-			source_audio.setAttribute('data-src', mp4.replace(/\/[^\/]*$/g, '/DASH_audio.mp4'))
+			source_audio.src = mp4.replace(/\/[^\/]*$/g, '/DASH_audio.mp4')
+			//source_audio.setAttribute('data-src', mp4.replace(/\/[^\/]*$/g, '/DASH_audio.mp4'))
 		}
 		//window.stop()
 		/*if (parsedManifest.mediaGroups.AUDIO.audio)
@@ -258,7 +258,7 @@ window.onload = function () {
 
 		//vid_container.appendChild(vid_footer);
 		//main.appendChild(vid_container);
-		observerinit.observe(video)
+		//observerinit.observe(video)
 		//observerinit.observe(source_audio)
 
 		//setObserver(video);
