@@ -28,12 +28,14 @@ var observerinit = new IntersectionObserver(function (entries, observerinit) {
 			vid = entry.target.querySelector('source[type="video/mp4"]');
 			aud = entry.target.querySelector('source[type="audio/mp4"]');
 			aud_tag = entry.target.querySelector('audio');
-			vid.setAttribute('src', vid.getAttribute("data-src"));
-			aud.setAttribute('src', aud.getAttribute("data-src"));
+			pxy = proxies[Math.floor(Math.random() * proxies.length)];
+			vid.setAttribute('src', pxy + vid.getAttribute("data-src"));
+			aud.setAttribute('src', pxy + aud.getAttribute("data-src"));
 			//entry.target.setAttribute('poster',"https://via.placeholder.com/620x350/aaaaaa/999999?text=Video Loaded");
 			entry.target.load();
-			observerinit.unobserve(entry.target);
 			aud_tag.load();
+			observerinit.unobserve(entry.target);
+
 			/*observer.observe(entry.target);*/
 		}
 	})
