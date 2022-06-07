@@ -217,7 +217,7 @@ window.onload = function () {
 		video.onseeked = () => audio_tag.currentTime = video.currentTime;
 		video.className = 'video__player';
 		//video.src = p.media.reddit_video.fallback_url//"sample.mp4"
-		video.setAttribute('autoplay', 'autoplay')
+		//video.setAttribute('autoplay', 'autoplay')
 
 		video.setAttribute('controls', 'controls')
 		video.setAttribute('muted', 'muted')
@@ -232,7 +232,7 @@ window.onload = function () {
 		//vid_container.appendChild(vid_footer);
 		//main.appendChild(vid_container);
 
-		setObserver(video);
+		//setObserver(video);
 		//observer.observe(video);
 		console.log(p);
 		/*if (p.distinguished == "moderator")

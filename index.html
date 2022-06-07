@@ -28,7 +28,7 @@
       <div class="swiper-slide" data-slide-type="img">Slide 5</div>
       <div class="swiper-slide" data-slide-type="img">Slide 6</div>
       <div class="swiper-slide" data-slide-type="img">
-        <video class="video__player" autoplay="autoplay" controls="controls" muted="muted">
+        <video class="video__player" controls="controls" muted="muted">
           <source type="video/mp4" src="https://v.redd.it/c97vfkhh28hz/DASH_2_4_M?source=fallback"><audio
             controls="controls">
             <source type="audio/mp4" src="https://v.redd.it/c97vfkhh28hz/audio">
@@ -59,6 +59,41 @@
       },
     });
 
+    swiper.on('slideChange', function () {
+      console.log('slide changed');
+      /* stop all videos (currentTime buggy without this loop idea - no "real" previousIndex) */
+      /*var sliderVideos = $(".swiper-slide video");
+      sliderVideos.each(function (index) {
+        this.currentTime = 0;
+      });*/
+
+      /* SWIPER GET CURRENT AND PREV SLIDE (AND VIDEO INSIDE) */
+      //var prevVideo = $("[data-swiper-slide-index=" + this.previousIndex + "]").find("video");
+      //var currentVideo = $("[data-swiper-slide-index=" + this.realIndex + "]").find("video");
+      var pSlide = $(swiper.slides[this.previousIndex]);
+      var rSlide = $(swiper.slides[this.realIndex]);
+      //var dataaw = rSlide.data;
+
+      //console.log(pSlide.find("video"));
+      //console.log(rSlide.find("video")[0]);
+      //console.log(dataaw);
+
+      //console.log(prevVideo);
+      //console.log(currentVideo);
+      let current = rSlide.find("video")[0];
+      let previous = pSlide.find("video")[0];
+
+      if (current) {
+        current.play();
+      }
+      if (previous) {
+        previous.currentTime = 0;
+        previous.pause();
+      }
+      //window.stop()
+      //prevVideo.pause();
+      //currentVideo.play();
+    });
 
     /*
        const videos = document.querySelectorAll('video');
