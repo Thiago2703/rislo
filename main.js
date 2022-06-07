@@ -1,4 +1,5 @@
 var n_watched = 0;
+var proxies = ['https://download203df.herokuapp.com/', 'https://download204df.herokuapp.com/', 'https://download205df.herokuapp.com/', 'https://download206df.herokuapp.com/'];
 async function mergeVideo(video, audio) {
 	let { createFFmpeg, fetchFile } = FFmpeg;
 	let ffmpeg = createFFmpeg();
@@ -32,13 +33,13 @@ var observerinit = new IntersectionObserver(function (entries, observerinit) {
 			//entry.target.setAttribute('poster',"https://via.placeholder.com/620x350/aaaaaa/999999?text=Video Loaded");
 			entry.target.load();
 			observerinit.unobserve(entry.target);
-			//aud_tag.load();
+			aud_tag.load();
 			/*observer.observe(entry.target);*/
 		}
 	})
 }, {
 	// set margin-down to preload video 
-	rootMargin: "0px 0px 500px 0px"
+	rootMargin: "0px 0px 400px 0px"
 });
 
 
@@ -216,8 +217,8 @@ window.onload = function () {
 		audio_tag.appendChild(source_audio)
 
 		let mp4 = p.media.reddit_video.fallback_url;
-		source_video.src = mp4;
-		//source_video.setAttribute('data-src', mp4)
+		//source_video.src = mp4;
+		source_video.setAttribute('data-src', mp4)
 		//source_audio.src = mp4.replace(/\/[^\/]*$/g, '/DASH_audio.mp4')
 		//video.pause();
 
@@ -227,11 +228,11 @@ window.onload = function () {
 		let parsedManifest = mpdParser.parse(manifest, { mpd });
 		try {
 			audio_url = parsedManifest.mediaGroups.AUDIO.audio.main.playlists[0].sidx.uri.match(/\/[^\/]*$/g)[0];
-			source_audio.src = mp4.replace(/\/[^\/]*$/g, audio_url)
-			//source_audio.setAttribute('data-src', mp4.replace(/\/[^\/]*$/g, audio_url))
+			//source_audio.src = mp4.replace(/\/[^\/]*$/g, audio_url)
+			source_audio.setAttribute('data-src', mp4.replace(/\/[^\/]*$/g, audio_url))
 		} catch (error) {
-			source_audio.src = mp4.replace(/\/[^\/]*$/g, '/DASH_audio.mp4')
-			//source_audio.setAttribute('data-src', mp4.replace(/\/[^\/]*$/g, '/DASH_audio.mp4'))
+			//source_audio.src = mp4.replace(/\/[^\/]*$/g, '/DASH_audio.mp4')
+			source_audio.setAttribute('data-src', mp4.replace(/\/[^\/]*$/g, '/DASH_audio.mp4'))
 		}
 		//window.stop()
 		/*if (parsedManifest.mediaGroups.AUDIO.audio)
@@ -247,6 +248,7 @@ window.onload = function () {
 		//video.setAttribute('autoplay', 'autoplay')
 
 		video.setAttribute('controls', 'controls')
+		video.setAttribute('preload', 'none')
 		video.setAttribute('muted', 'muted')
 
 		video.appendChild(source_video);
@@ -258,7 +260,7 @@ window.onload = function () {
 
 		//vid_container.appendChild(vid_footer);
 		//main.appendChild(vid_container);
-		//observerinit.observe(video)
+		observerinit.observe(video)
 		//observerinit.observe(source_audio)
 
 		//setObserver(video);
@@ -422,7 +424,7 @@ window.onload = function () {
 }
 		}*/
 	}
-	let proxies = ['https://download203df.herokuapp.com/', 'https://download204df.herokuapp.com/', 'https://download205df.herokuapp.com/', 'https://download206df.herokuapp.com/'];
+
 	var n_elem = [];
 	/*async function waitForElement() {
 		console.log('checking')
