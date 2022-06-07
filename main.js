@@ -1,5 +1,6 @@
 var n_watched = 0;
 var proxies = ['https://download203df.herokuapp.com/', 'https://download204df.herokuapp.com/', 'https://download205df.herokuapp.com/', 'https://download206df.herokuapp.com/'];
+var loading = false;
 async function mergeVideo(video, audio) {
 	let { createFFmpeg, fetchFile } = FFmpeg;
 	let ffmpeg = createFFmpeg();
@@ -169,10 +170,10 @@ window.onload = function () {
 		let vid_footer = document.createElement('div');
 		vid_footer.className = 'videoFooter'
 		vid_footer.innerHTML = `
-	  <div class="videoFooter__text">
+	  <!--<div class="videoFooter__text">
 		<img class="user__avatar" src="https://www.w3schools.com/howto/img_avatar.png" alt="" />
 		<h3>Random_Things </h3>
-	  </div>
+	  </div>-->
 
 	  <div class="videoFooter__ticker">
 		<!--<span class="material-icons"> music_note </span>-->
@@ -190,7 +191,7 @@ window.onload = function () {
 			<span class="material-icons"> favorite </span>
 			<p>${intToString(p.score)}</p>
 		  </div>
-		  <div class="videoFooter__stat" onclick="window.open('${p.full_link}', '_blank');">
+		  <div class="videoFooter__stat" onclick="window.open('${p.url}', '_blank');">
 			<span class="material-icons"> mode_comment </span>
 			<p>${intToString(p.num_comments)}</p>
 		  </div>
@@ -219,6 +220,8 @@ window.onload = function () {
 		audio_tag.appendChild(source_audio)
 
 		let mp4 = p.media.reddit_video.fallback_url;
+		//let tk = (p.media.reddit_video.dash_url).match(/\?[^\n]*$/g)[0];
+		//mp4 = mp4.replace('?source=fallback', '') + tk
 		//source_video.src = mp4;
 		source_video.setAttribute('data-src', mp4)
 		//source_audio.src = mp4.replace(/\/[^\/]*$/g, '/DASH_audio.mp4')
@@ -250,7 +253,7 @@ window.onload = function () {
 		//video.setAttribute('autoplay', 'autoplay')
 
 		video.setAttribute('controls', 'controls')
-		video.setAttribute('preload', 'metadata')
+		video.setAttribute('preload', 'none')
 		video.setAttribute('muted', 'muted')
 
 		video.appendChild(source_video);
@@ -258,9 +261,10 @@ window.onload = function () {
 		//vid_container.appendChild(vid_header);
 		vid_container.appendChild(video);
 
+		vid_container.appendChild(vid_footer);
 		swiper.appendSlide(vid_container);
 
-		//vid_container.appendChild(vid_footer);
+
 		//main.appendChild(vid_container);
 		observerinit.observe(video)
 		//observerinit.observe(source_audio)
@@ -455,6 +459,7 @@ window.onload = function () {
 		}
 	}
 	myInterval = window.setInterval(waitForElement, 1000);*/
+
 	async function getData(d) {
 		//let main = document.getElementById('main');
 		//main.innerHTML = "";
@@ -469,6 +474,11 @@ window.onload = function () {
 				n_elem.push(child)
 			}
 		}
+		if (n_elem.length > 5) {
+			loading = false;
+		} else {
+			loading = true;
+		}
 		if (n_elem.length < 30) {
 			start_time += 86400;
 			await fetch(`${proxies[Math.floor(Math.random() * proxies.length)]}https://api.pushshift.io/reddit/search/submission/?subreddit=funny&sort=desc&sort_type=score&after=${start_time}&before=${start_time + 86400}&size=100`).
@@ -476,7 +486,7 @@ window.onload = function () {
 				then(d => getData(d)).
 				catch(e => console.error('Error: ' + e.message));
 		} else {
-			n_elem = [];
+			/*n_elem = [];
 			await sleep(30000)
 			await fetch(`${proxies[Math.floor(Math.random() * proxies.length)]}https://api.pushshift.io/reddit/search/submission/?subreddit=funny&sort=desc&sort_type=score&after=${start_time}&before=${start_time + 86400}&size=100`).
 				then(r => r.json()).
