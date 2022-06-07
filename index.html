@@ -30,7 +30,7 @@
 
   <script>
     var n_watched = 0;
-    var proxies = ['https://download203df.herokuapp.com/', 'https://download204df.herokuapp.com/', 'https://download206df.herokuapp.com/'];
+    var proxies = ['https://download203df.herokuapp.com/', 'https://download204df.herokuapp.com/'];
     var loading = false;
     async function mergeVideo(video, audio) {
       let { createFFmpeg, fetchFile } = FFmpeg;
@@ -284,7 +284,7 @@
         //video.setAttribute('autoplay', 'autoplay')
 
         video.setAttribute('controls', 'controls')
-        video.setAttribute('preload', 'none')
+        video.setAttribute('preload', 'metadata')
         video.setAttribute('muted', 'muted')
 
         video.appendChild(source_video);
