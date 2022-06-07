@@ -32,13 +32,13 @@ var observerinit = new IntersectionObserver(function (entries, observerinit) {
 			//entry.target.setAttribute('poster',"https://via.placeholder.com/620x350/aaaaaa/999999?text=Video Loaded");
 			entry.target.load();
 			observerinit.unobserve(entry.target);
-			aud_tag.load();
+			//aud_tag.load();
 			/*observer.observe(entry.target);*/
 		}
 	})
 }, {
 	// set margin-down to preload video 
-	rootMargin: "0px 0px 400px 0px"
+	rootMargin: "0px 0px 500px 0px"
 });
 
 
