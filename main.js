@@ -248,7 +248,7 @@ window.onload = function () {
 		//video.setAttribute('autoplay', 'autoplay')
 
 		video.setAttribute('controls', 'controls')
-		video.setAttribute('preload', 'none')
+		video.setAttribute('preload', 'auto')
 		video.setAttribute('muted', 'muted')
 
 		video.appendChild(source_video);
