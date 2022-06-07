@@ -29,8 +29,8 @@ var observerinit = new IntersectionObserver(function (entries, observerinit) {
 			aud = entry.target.querySelector('source[type="audio/mp4"]');
 			aud_tag = entry.target.querySelector('audio');
 			pxy = proxies[Math.floor(Math.random() * proxies.length)];
-			vid.setAttribute('src', pxy + vid.getAttribute("data-src"));
-			aud.setAttribute('src', pxy + aud.getAttribute("data-src"));
+			vid.setAttribute('src', vid.getAttribute("data-src"));
+			aud.setAttribute('src', aud.getAttribute("data-src"));
 			//entry.target.setAttribute('poster',"https://via.placeholder.com/620x350/aaaaaa/999999?text=Video Loaded");
 			entry.target.load();
 			aud_tag.load();
