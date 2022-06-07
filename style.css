@@ -4,10 +4,6 @@ body {
   height: 100%;
 }
 
-html {
-  scroll-snap-type: y mandatory;
-}
-
 body {
   /*background: #eee;*/
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -21,6 +17,7 @@ body {
   width: 100%;
   height: 100%;
 }
+
 
 .swiper-slide {
   text-align: center;

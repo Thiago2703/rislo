@@ -31,14 +31,14 @@ var observerinit = new IntersectionObserver(function (entries, observerinit) {
 			aud.setAttribute('src', aud.getAttribute("data-src"));
 			//entry.target.setAttribute('poster',"https://via.placeholder.com/620x350/aaaaaa/999999?text=Video Loaded");
 			entry.target.load();
-			aud_tag.load();
 			observerinit.unobserve(entry.target);
+			aud_tag.load();
 			/*observer.observe(entry.target);*/
 		}
 	})
 }, {
 	// set margin-down to preload video 
-	rootMargin: "0px 0px 300px 0px"
+	rootMargin: "0px 0px 400px 0px"
 });
 
 
@@ -242,7 +242,6 @@ window.onload = function () {
 		video.onplay = function () { audio_tag.play(); }
 		video.onpause = function () { audio_tag.pause(); }
 		video.onseeked = () => audio_tag.currentTime = video.currentTime;
-
 		video.className = 'video__player';
 		//video.src = p.media.reddit_video.fallback_url//"sample.mp4"
 		//video.setAttribute('autoplay', 'autoplay')
@@ -474,7 +473,7 @@ window.onload = function () {
 				catch(e => console.error('Error: ' + e.message));
 		} else {
 			n_elem = [];
-			await sleep(60000)
+			await sleep(30000)
 			await fetch(`${proxies[Math.floor(Math.random() * proxies.length)]}https://api.pushshift.io/reddit/search/submission/?subreddit=funny&sort=desc&sort_type=score&after=${start_time}&before=${start_time + 86400}&size=100`).
 				then(r => r.json()).
 				then(d => getData(d)).
