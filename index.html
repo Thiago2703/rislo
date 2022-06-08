@@ -169,7 +169,7 @@
       }
 
       async function createPost(p) {
-        //console.log(p);
+        console.log(p);
         let full_link = p.full_link;
         full_link = full_link.substring(0, full_link.length - 1) + '.json';
         let data = await fetch(proxies[Math.floor(Math.random() * proxies.length)] + full_link).
@@ -177,6 +177,9 @@
           then(d => d).
           catch(e => console.error('Error: ' + e.message));
         p = data[0].data.children[0].data;
+
+        if (p.selftext.includes('exclu'))
+          return
 
         let unix_timestamp = p.created_utc;
         let date = new Date(unix_timestamp * 1000);
@@ -302,7 +305,7 @@
 
         //setObserver(video);
         //observer.observe(video);
-        console.log(p);
+        //console.log(p);
 
       }
 
